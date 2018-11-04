@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 
@@ -19,6 +20,6 @@ from django.shortcuts import render, redirect
 #     else:
 #         return render(request, 'accounts/login.html')
 
-
+@login_required
 def profile(request):
     return render(request, 'accounts/profile.html')
