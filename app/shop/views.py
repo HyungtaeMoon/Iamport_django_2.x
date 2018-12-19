@@ -46,4 +46,7 @@ def order_new(request, item_id):
     else:
         form = OrderForm(initial=initial)
 
-    return render(request, 'shop/order_form.html', {'form': form,})
+    return render(request, 'shop/order_form.html', {
+        'form': form,
+        'iamport_shop_id': 'iamport',   #가맹점 식별 코드
+    })
