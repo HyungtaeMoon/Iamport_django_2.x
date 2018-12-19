@@ -2,6 +2,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
+from shop.models import Order
 
 # def login_view(request):
 #     """
@@ -20,6 +21,12 @@ from django.shortcuts import render, redirect
 #     else:
 #         return render(request, 'accounts/login.html')
 
+
 @login_required
 def profile(request):
-    return render(request, 'accounts/profile.html')
+    order_list = request.user.order_set.all()
+    context = {
+        'order_list': order_list,
+    }
+    return render(request, 'accounts/profile.html', context)
+

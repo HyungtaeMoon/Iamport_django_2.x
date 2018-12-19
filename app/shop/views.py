@@ -42,7 +42,7 @@ def order_new(request, item_id):
             order.user = request.user
             order.item = item
             order.save()
-            return redirect('profile')
+            return redirect('accounts:profile')
     else:
         form = OrderForm(initial=initial)
 

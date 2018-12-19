@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% load humanize %}
 
 {% block content %}
     <div class="container">
@@ -8,7 +9,22 @@
                 <hr>
 
             <h3>구매내역</h3>
-                ...
+            <table class="table table-hover table=bordered">
+                <thead>
+                    <tr>
+                        <th>상품명</th>
+                        <th>상품가격</th>
+                    </tr>
+                </thead>
+                <tbody>
+                {% for order in order_list %}
+                    <tr>
+                        <td>{{ order.name }}</td>
+                        <td class="text-right">{{ order.amount|intcomma }}원</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
             </div>
         </div>
     </div>
