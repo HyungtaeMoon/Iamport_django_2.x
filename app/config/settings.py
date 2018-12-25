@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/2.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.1/ref/settings/
 """
-
+import json
 import os
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -19,9 +19,16 @@ ROOT_DIR = os.path.dirname(BASE_DIR)
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 
+SECRETS_DIR = os.path.join(ROOT_DIR, '.secrets')
 
-# SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '@%)a476i^w50n1+54##@++39qi4$)1%38mc_@6(#n_*^lej*lc'
+secrets = json.load(open(os.path.join(SECRETS_DIR, 'base.json')))
+
+
+SECRET_KEY = secrets['SECRET_KEY']
+
+IAMPORT_SHOP_ID = secrets['IAMPORT_SHOP_ID']
+IAMPORT_API_KEY = secrets['IAMPORT_API_KEY']
+IAMPORT_SECRET_KEY = secrets['IAMPORT_SECRET_KEY']
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
