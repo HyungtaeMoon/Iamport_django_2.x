@@ -3,6 +3,7 @@ from uuid import uuid4
 from django.conf import settings
 from django.db import models
 from iamport import Iamport
+from jsonfield import JSONField
 
 
 class Item(models.Model):
@@ -38,6 +39,7 @@ class Order(models.Model):
         # 빠르게 접근하여 조회가 가능
         db_index=True
     )
+    meta = JSONField(blank=True, default={})
     created_at = models.TimeField(auto_now_add=True)
     updated_at = models.TimeField(auto_now=True)
 
