@@ -5,6 +5,7 @@ import pytz
 from django.conf import settings
 from django.contrib.humanize.templatetags.humanize import intcomma
 from django.db import models
+from django.http import Http404
 from django.utils.safestring import mark_safe
 from iamport import Iamport
 from jsonfield import JSONField
@@ -138,8 +139,10 @@ class Order(models.Model):
     def update(self, commit=False, meta=None):
         # 정상적인 접근으로 imp_uid 가 있으면
         if self.imp_uid:
-            # request 를 통해 들어오는 self.imp_uid 를 self.meta 변수에 할당
-            self.meta = meta or self.api.find(imp_uid=self.imp_uid)
+            try:
+                self.meta = meta or self.api.find(imp_uid=self.imp_uid)
+            except Iamport.HttpError:
+                raise Http404('Not found {}'.format(self.imp_uid))
             # assert 문은 해당 코드가 참이면 코드를 수행하고
             # 아닐 경우에는 AssertionError (선택사항) 을 일으킴
             assert str(self.merchant_uid) == self.meta['merchant_uid']
