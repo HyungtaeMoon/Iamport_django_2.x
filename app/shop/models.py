@@ -148,3 +148,15 @@ class Order(models.Model):
             assert str(self.merchant_uid) == self.meta['merchant_uid']
         if commit:
             self.save()
+
+    def cancel(self, reason=None, commit=True):
+        '결제내역 취소'
+        try:
+            meta = self.api.cancel(reason, imp_uid=self.imp_uid)
+            assert str(self.merchant_uid) == self.meta['merchant_uid']
+            self.update(commit=commit, meta=meta)
+        # 취소 시 오류 예외 처리(이미 취소된 결제는 에러가 발생)
+        except Iamport.ResponseError as e:
+            self.update(commit=commit)
+        if commit:
+            self.save()
