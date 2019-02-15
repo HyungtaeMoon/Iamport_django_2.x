@@ -12,6 +12,7 @@ requests = "*"
 lxml = "*"
 iamport-rest-client = "*"
 jsonfield = "*"
+django-crispy-forms = "*"
 
 [dev-packages]
 

@@ -1,4 +1,4 @@
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
@@ -30,3 +30,7 @@ def profile(request):
     }
     return render(request, 'accounts/profile.html', context)
 
+
+def logout_view(request):
+    logout(request)
+    return redirect('shop:index')
