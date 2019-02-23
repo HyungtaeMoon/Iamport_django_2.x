@@ -1,22 +1,22 @@
 {% extends 'layout.html' %}
 
 {% block content %}
-<div class="container">
-    <div class="col-md-8 offset-md-2 mt-3">
-        <form action="" method="POST" id="pay-form">
-            {% csrf_token %}
-            <div class="card card-default">
-                <div class="card-header">
-                    결제 진행 중 ...
+    <div class="container">
+        <div class="col-md-8 offset-md-2 mt-3">
+            <form action="" method="POST" id="pay-form">
+                {% csrf_token %}
+                <div class="card card-default">
+                    <div class="card-header">
+                        결제 진행 중 ...
+                    </div>
+                    <div class="card-body">
+                        {{ form }}              {# 기본 필드 렌더링 #}
+                        {{ form.as_iamport }}   {# iamport 렌더링 #}
+                    </div>
                 </div>
-                <div class="card-body">
-                    {{ form }}              {# 기본 필드 렌더링 #}
-                    {{ form.as_iamport }}   {# iamport 렌더링 #}
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
-</div>
 {% endblock %}
 
 {% block extra_body %}
