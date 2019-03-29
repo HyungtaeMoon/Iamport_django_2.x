@@ -8,7 +8,7 @@
                 <h3>Login</h3>
                 <form action="" method="POST">
                     {% csrf_token %}
-                    <table class="table table-hover table-bordered">
+                    <table class="table">
                         {{ form | crispy }}
                     </table>
                     <input type="submit" class="btn btn-outline-success">
